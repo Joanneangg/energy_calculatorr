@@ -1,5 +1,5 @@
 function calculateEnergy() {
-    const age = document.getElementById('age').value;
+    const age = parseInt(document.getElementById('age').value);
     const gender = document.getElementById('gender').value;
     const activity = document.getElementById('activity').value;
     const result = document.getElementById('result');
@@ -7,27 +7,27 @@ function calculateEnergy() {
     if (age && gender && activity) {
         let energyIntake = 0;
 
-        // Hypothetical RNI values for demonstration (in kcal/day)
         const rniData = {
             male: {
-                low: [2100, 2200, 2300, 2400, 2500],
-                moderate: [2300, 2400, 2500, 2600, 2700],
-                high: [2600, 2700, 2800, 2900, 3000]
+                13: { low: 1930, moderate: 2210, high: 2480, veryhigh: 2760 },
+                14: { low: 1930, moderate: 2210, high: 2480, veryhigh: 2760 },
+                15: { low: 1930, moderate: 2210, high: 2480, veryhigh: 2760 },
+                16: { low: 2050, moderate: 2340, high: 2640, veryhigh: 2930 },
+                17: { low: 2050, moderate: 2340, high: 2640, veryhigh: 2930 },
+                18: { low: 2050, moderate: 2340, high: 2640, veryhigh: 2930 }
             },
             female: {
-                low: [1800, 1900, 2000, 2100, 2200],
-                moderate: [2000, 2100, 2200, 2300, 2400],
-                high: [2200, 2300, 2400, 2500, 2600]
+                13: { low: 1580, moderate: 1810, high: 2040, veryhigh: 2260 },
+                14: { low: 1580, moderate: 1810, high: 2040, veryhigh: 2260 },
+                15: { low: 1580, moderate: 1810, high: 2040, veryhigh: 2260 },
+                16: { low: 1660, moderate: 1890, high: 2130, veryhigh: 2370 },
+                17: { low: 1660, moderate: 1890, high: 2130, veryhigh: 2370 },
+                18: { low: 1660, moderate: 1890, high: 2130, veryhigh: 2370 }
             }
         };
 
-        // Index for age: 13-17 corresponds to 0-4
-        const ageIndex = age - 13;
+        energyIntake = rniData[gender][age][activity];
 
-        // Get the correct energy intake from RNI data
-        energyIntake = rniData[gender][activity][ageIndex];
-
-        // Display the result
         result.textContent = `Recommended Energy Intake: ${energyIntake} kcal/day`;
     } else {
         result.textContent = 'Please fill out all fields.';
